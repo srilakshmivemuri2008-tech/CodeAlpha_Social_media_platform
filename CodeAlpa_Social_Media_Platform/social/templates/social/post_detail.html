@@ -1,0 +1,29 @@
+{% extends 'social/base.html' %}
+{% block title %}Post by {{ post.author.username }}{% endblock %}
+
+{% block content %}
+{% include 'social/_post_card.html' %}
+
+<div class="card">
+    <h3>Comments</h3>
+    <form method="post" class="comment-form">
+        {% csrf_token %}
+        {{ form.content }}
+        <button type="submit" class="btn btn-primary">Comment</button>
+    </form>
+
+    {% if comments %}
+        <ul class="comment-list">
+            {% for comment in comments %}
+                <li class="comment">
+                    <a href="{% url 'profile' comment.author.username %}" class="author">{{ comment.author.username }}</a>
+                    <span>{{ comment.content }}</span>
+                    <span class="timestamp">{{ comment.created_at|date:"M d, H:i" }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty-state">No comments yet. Be the first!</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% load social_extras %}
+<div class="card post-card" data-post-id="{{ post.id }}">
+    <div class="post-header">
+        <a href="{% url 'profile' post.author.username %}" class="author">{{ post.author.username }}</a>
+        <span class="timestamp">{{ post.created_at|date:"M d, Y H:i" }}</span>
+    </div>
+    <p class="post-content">{{ post.content }}</p>
+    {% if post.image_url %}
+        <img src="{{ post.image_url }}" alt="Post image" class="post-image">
+    {% endif %}
+    {% with liked=post|is_liked_by:request.user %}
+    <div class="post-actions">
+        <button class="like-btn {% if liked %}liked{% endif %}"
+                data-post-id="{{ post.id }}"
+                data-liked="{% if liked %}true{% else %}false{% endif %}">
+            <span class="like-icon">{% if liked %}❤️{% else %}🤍{% endif %}</span>
+            <span class="like-count">{{ post.like_count }}</span>
+        </button>
+        <a href="{% url 'post_detail' post.id %}" class="comment-link">💬 {{ post.comment_count }} comments</a>
+    </div>
+    {% endwith %}
+</div>

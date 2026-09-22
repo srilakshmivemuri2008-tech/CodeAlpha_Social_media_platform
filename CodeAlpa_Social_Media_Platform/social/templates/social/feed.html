@@ -1,0 +1,44 @@
+{% extends 'social/base.html' %}
+{% block title %}Feed{% endblock %}
+
+{% block content %}
+<div class="feed-layout">
+    <div class="feed-main">
+        <div class="card composer">
+            <form method="post" action="{% url 'feed' %}">
+                {% csrf_token %}
+                {{ form.content }}
+                {{ form.image_url }}
+                <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+        </div>
+
+        {% if posts %}
+            {% for post in posts %}
+                {% include 'social/_post_card.html' %}
+            {% endfor %}
+        {% else %}
+            <p class="empty-state">Your feed is empty. Follow some people from
+                <a href="{% url 'explore' %}">Explore</a> to see their posts here!</p>
+        {% endif %}
+    </div>
+
+    <aside class="feed-sidebar">
+        <div class="card">
+            <h3>Suggested for you</h3>
+            {% if suggested_users %}
+                <ul class="user-list">
+                    {% for u in suggested_users %}
+                        <li>
+                            <a href="{% url 'profile' u.username %}">{{ u.username }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="muted">No new suggestions right now.</p>
+            {% endif %}
+            <a href="{% url 'explore' %}" class="link">See all →</a>
+        </div>
+    </aside>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'social/base.html' %}
+{% block title %}{{ profile_user.username }}'s profile{% endblock %}
+
+{% block content %}
+<div class="card profile-header">
+    <img src="{{ profile_user.avatar_url|default:'https://api.dicebear.com/7.x/identicon/svg?seed='|add:profile_user.username }}"
+         alt="avatar" class="avatar-lg">
+    <div>
+        <h2>{{ profile_user.username }}</h2>
+        <p class="muted">{{ profile_user.bio|default:"No bio yet." }}</p>
+        <div class="stats">
+            <span><strong>{{ profile_user.post_count }}</strong> posts</span>
+            <span><strong>{{ profile_user.follower_count }}</strong> followers</span>
+            <span><strong>{{ profile_user.following_count }}</strong> following</span>
+        </div>
+
+        {% if profile_user == user %}
+            <a href="{% url 'edit_profile' %}" class="btn btn-secondary">Edit profile</a>
+        {% else %}
+            <button class="btn btn-primary follow-btn"
+                    data-username="{{ profile_user.username }}"
+                    data-following="{% if is_following %}true{% else %}false{% endif %}">
+                {% if is_following %}Unfollow{% else %}Follow{% endif %}
+            </button>
+        {% endif %}
+    </div>
+</div>
+
+<h3>Posts</h3>
+{% if posts %}
+    {% for post in posts %}
+        {% include 'social/_post_card.html' %}
+    {% endfor %}
+{% else %}
+    <p class="empty-state">No posts yet.</p>
+{% endif %}
+{% endblock %}
