@@ -1,0 +1,196 @@
+:root {
+    --primary: #6c5ce7;
+    --primary-dark: #5849c2;
+    --bg: #f4f5f9;
+    --card-bg: #ffffff;
+    --text: #1e1e2f;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --danger: #ef4444;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar .brand {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text);
+}
+
+.nav-links { display: flex; gap: 18px; align-items: center; }
+
+.link-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+}
+
+.inline-form { display: inline; }
+
+.container {
+    max-width: 900px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.alert {
+    background: #eafbea;
+    border: 1px solid #b7ebb7;
+    color: #1a7a1a;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.feed-layout {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 20px;
+}
+
+@media (max-width: 720px) {
+    .feed-layout { grid-template-columns: 1fr; }
+}
+
+.composer textarea,
+.comment-form input[type=text],
+input[type=text], input[type=url], input[type=email], input[type=password], textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    font-family: inherit;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-dark); text-decoration: none; }
+
+.btn-secondary { background: #eef0ff; color: var(--primary-dark); }
+.btn-secondary:hover { text-decoration: none; background: #e0e3ff; }
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+}
+
+.post-header .author { font-weight: 700; }
+.timestamp { color: var(--muted); font-size: 0.82rem; }
+
+.post-content { margin: 8px 0; white-space: pre-wrap; }
+
+.post-image {
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 8px 0;
+}
+
+.post-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.like-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    cursor: pointer;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.like-btn.liked { border-color: #f97316; }
+
+.comment-link { color: var(--muted); font-size: 0.9rem; }
+
+.empty-state { color: var(--muted); text-align: center; padding: 30px 0; }
+
+.muted { color: var(--muted); }
+
+.user-list { list-style: none; padding: 0; margin: 10px 0; }
+.user-list li { padding: 6px 0; border-bottom: 1px solid var(--border); }
+.user-list li:last-child { border-bottom: none; }
+
+.user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.user-card { text-align: center; }
+
+.avatar-sm, .avatar-lg {
+    border-radius: 50%;
+    object-fit: cover;
+    background: #eee;
+}
+
+.avatar-sm { width: 56px; height: 56px; margin-bottom: 6px; }
+.avatar-lg { width: 90px; height: 90px; }
+
+.profile-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.stats { display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; }
+
+.comment-list { list-style: none; padding: 0; }
+.comment { padding: 8px 0; border-bottom: 1px solid var(--border); }
+.comment .author { font-weight: 600; margin-right: 6px; }
+.comment .timestamp { float: right; }
+
+.form-card { max-width: 420px; margin: 0 auto; }
